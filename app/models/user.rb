@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :books_comments, dependent: :destroy
+  has_many :group_users
+  has_many :groups, through: :group_users
 
   attachment :profile_image, destroy: false
 
@@ -19,7 +21,7 @@ has_many :followers, through: :reverse_of_relationships, source: :follower
 has_many :followings, through: :relationships, source: :followed
  def follow(user_id)
     relationships.create(followed_id: user_id)
-  end
+ end
 
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
