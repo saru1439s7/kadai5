@@ -15,8 +15,9 @@ Rails.application.routes.draw do
    resources :book_comments, only: [:create, :destroy]
    resources :followers, only: [:create, :destroy]
   end
-  resources :groups,only:[:show,:new,:edit,:update,:index,:update,:create] do
+  resources :groups do
     get "join" => "groups#join"
+    delete 'join' => 'groups#join'
    end
   #get '/search', to: 'searches#search'
 end
